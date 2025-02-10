@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+//    "typeRoots": ["./", "./node_modules/@types"],
+    "baseUrl": "./",
+    "types": ["bun"],
+    "paths": {
+      "@/*": ["src/*"],
+    },
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  },
+  "include": ["src"],
+}
