@@ -7,6 +7,12 @@
     "dev:start": "bun --watch run dev",
     "prepare": "husky"
   },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --max-warnings 0 ."
+    ]
+  },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.12",
     "@types/bun": "latest",
