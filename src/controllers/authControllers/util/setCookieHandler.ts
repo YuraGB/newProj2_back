@@ -6,6 +6,7 @@ import { Context } from "hono";
 const setCookieHandler = async (c: Context, user: TUser): Promise<void> => {
   const tokenTTL = 60 * 5;
 
+  // jwt
   const token = await sign(
     {
       id: user.id,

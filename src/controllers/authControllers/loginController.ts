@@ -15,6 +15,7 @@ export const loginController = async (c: Context) => {
 
   // set jwt into cookies
   await setCookieHandler(c, result);
+
   return c.json(result, 200);
 };
 

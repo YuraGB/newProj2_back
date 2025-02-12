@@ -4,6 +4,8 @@ import { mkdirSync, existsSync } from "fs";
 import { migrate } from "drizzle-orm/bun-sql/migrator";
 import * as schema from "./schemas";
 import * as path from "node:path";
+import * as fs from "node:fs";
+import { BunSQLDatabase } from "drizzle-orm/bun-sql/driver";
 
 const sqlite = new Database("sqlite.db");
 
@@ -24,9 +26,11 @@ if (!existsSync(metaFolder)) {
 const journalPath = `${metaFolder}/_journal.json`;
 if (!existsSync(journalPath)) {
   console.log(`_journal.json not found, creating...`);
-  require("fs").writeFileSync(journalPath, "{}");
+  fs.writeFileSync(journalPath, "{}");
   console.log("_journal.json created!");
 }
 
 // Запуск міграцій
-// await migrate(db as any, { migrationsFolder });
+await migrate(db as unknown as BunSQLDatabase<Record<string, unknown>>, {
+  migrationsFolder,
+});

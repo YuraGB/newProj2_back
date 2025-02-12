@@ -2,7 +2,6 @@ import bcrypt from "bcryptjs";
 import { db } from "@/db/drizzle";
 import { users } from "@/db/schemas/userTable";
 import { eq } from "drizzle-orm/sql/expressions/conditions";
-import { sign } from "hono/jwt";
 
 export const loginService = async (email: string, password: string) => {
   try {
