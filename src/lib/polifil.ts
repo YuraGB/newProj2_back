@@ -1,23 +1,28 @@
-// src/polyfills.ts
 import zlib from "node:zlib";
 
-const make = (ctx, handle) =>
+//@ts-expect-error polyfill
+const make = (ctx: this | this, handle: zlib.Gzip) =>
   Object.assign(ctx, {
     writable: new WritableStream({
+      //@ts-expect-error polyfill
       write: (chunk) => handle.write(chunk),
+      //@ts-expect-error polyfill
       close: () => handle.end(),
     }),
     readable: new ReadableStream({
       type: "bytes",
       start(ctrl) {
-        handle.on("data", (chunk) => ctrl.enqueue(chunk));
+        handle.on("data", (chunk: ArrayBufferView<ArrayBufferLike>) =>
+          ctrl.enqueue(chunk),
+        );
         handle.once("end", () => ctrl.close());
       },
     }),
   });
 
+//@ts-expect-error polyfill
 globalThis.CompressionStream ??= class CompressionStream {
-  constructor(format) {
+  constructor(format: string) {
     make(
       this,
       format === "deflate"
@@ -29,8 +34,9 @@ globalThis.CompressionStream ??= class CompressionStream {
   }
 };
 
+// @ts-expect-error polyfill
 globalThis.DecompressionStream ??= class DecompressionStream {
-  constructor(format) {
+  constructor(format: string) {
     make(
       this,
       format === "deflate"

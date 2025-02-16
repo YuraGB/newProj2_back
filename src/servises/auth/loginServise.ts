@@ -16,7 +16,9 @@ export const loginService = async (email: string, password: string) => {
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) return { error: "Invalid password" };
 
-    return user;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...withoutPassword } = user;
+    return withoutPassword;
   } catch (e) {
     return { error: (e as Error).message };
   }

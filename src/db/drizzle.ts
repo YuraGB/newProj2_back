@@ -22,15 +22,13 @@ if (!existsSync(metaFolder)) {
   mkdirSync(metaFolder, { recursive: true });
   console.log("Meta folder created!");
 }
-// Перевіряємо наявність файлу _journal.json, якщо його немає - створюємо
+
 const journalPath = `${metaFolder}/_journal.json`;
 if (!existsSync(journalPath)) {
-  console.log(`_journal.json not found, creating...`);
   fs.writeFileSync(journalPath, "{}");
   console.log("_journal.json created!");
 }
 
-// Запуск міграцій
 await migrate(db as unknown as BunSQLDatabase<Record<string, unknown>>, {
   migrationsFolder,
 });

@@ -4,6 +4,7 @@ import setCookieHandler from "@/controllers/authControllers/util/setCookieHandle
 
 export const loginController = async (c: Context) => {
   const { email, password } = await c.req.json();
+
   if (!email || !password) return c.json({ error: "Missing credentials" }, 400);
 
   const result = await loginService(email, password);

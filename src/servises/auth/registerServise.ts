@@ -1,17 +1,22 @@
 import { db } from "@/db/drizzle";
-import { TUser, users } from "@/db/schemas/userTable";
+import { users } from "@/db/schemas/userTable";
 import bcrypt from "bcryptjs";
-import { TNewUser } from "@/types";
+import { TNewUser, TUserWithoutPassword } from "@/types";
 import dotenv from "dotenv";
 dotenv.config({
   path: ".env",
 });
 
+export type RegisterServiceResult = {
+  user?: TUserWithoutPassword;
+  error?: string;
+};
+
 export const registerService = async ({
   email,
   password,
   userName,
-}: TNewUser): Promise<TUser | { error: string }> => {
+}: TNewUser): Promise<RegisterServiceResult> => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
@@ -24,10 +29,10 @@ export const registerService = async ({
       return { error: "User not created" };
     }
 
-    return newUser;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...userWithoutPassword } = newUser;
+    return { user: userWithoutPassword };
   } catch (e) {
     return { error: (e as Error).message };
   }
 };
-
-export type RegisterServiceResult = ReturnType<typeof registerService>;

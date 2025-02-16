@@ -1,10 +1,11 @@
 import { db } from "@/db/drizzle";
 import { TUser, users } from "@/db/schemas/userTable";
 import { eq } from "drizzle-orm/sql/expressions/conditions";
+import { TUserWithoutPassword } from "@/types";
 
 export const profileService = async (
   id: TUser["id"],
-): Promise<TUser | { error: string }> => {
+): Promise<TUserWithoutPassword | { error: string }> => {
   try {
     const [user] = await db
       .select()
@@ -15,8 +16,9 @@ export const profileService = async (
     if (!user) {
       return { error: "User not found" };
     }
-
-    return user;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
   } catch (e) {
     return { error: (e as Error).message };
   }

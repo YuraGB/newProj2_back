@@ -1,9 +1,12 @@
-import { TUser } from "@/db/schemas";
 import { sign } from "hono/jwt";
 import { setCookie } from "hono/cookie";
 import { Context } from "hono";
+import { TUserWithoutPassword } from "@/types";
 
-const setCookieHandler = async (c: Context, user: TUser): Promise<void> => {
+const setCookieHandler = async (
+  c: Context,
+  user: TUserWithoutPassword,
+): Promise<void> => {
   const tokenTTL = 60 * 5;
 
   // jwt
