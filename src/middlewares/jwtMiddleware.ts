@@ -1,11 +1,14 @@
 import { Context } from "hono";
 import { verify } from "hono/jwt";
-import { getCookie } from "hono/cookie";
 
 const jwtMiddleware = async (c: Context, next: () => Promise<void>) => {
-  const token = getCookie(c, "token");
-  if (!token) return c.json({ error: "Unauthorized" }, 401);
+  const authHeader = c.req.header("Authorization");
 
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return c.json({ message: "Unauthorized" }, 401);
+  }
+
+  const token = authHeader.split(" ")[1];
   try {
     const payload = await verify(token, process.env.JWT_SECRET!);
 

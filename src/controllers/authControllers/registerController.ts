@@ -21,10 +21,12 @@ export const registerController = async (c: Context) => {
     return c.json({ error: "User not created" }, 400);
   }
 
-  // set jwt into cookies
-  await setCookieHandler(c, user);
+  // generate jwt (access and refresh) tokens
+  // refresh set into cookies
+  // return access token
+  const accessToken = await setCookieHandler(c, user);
 
-  return c.json(user, 201); // Return 201 for successful user registration
+  return c.json({ user: user, accessToken }, 201);
 };
 
 export default registerController;

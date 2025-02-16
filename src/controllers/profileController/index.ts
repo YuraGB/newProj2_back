@@ -3,7 +3,6 @@ import { profileService } from "@/servises/profile/profileService";
 
 export const profileController = async (c: Context) => {
   const userSession = c.get("user");
-
   if (!userSession) {
     return c.json({ error: "Unauthorized" }, 401);
   }

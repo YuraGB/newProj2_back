@@ -14,10 +14,12 @@ export const loginController = async (c: Context) => {
     return c.json(result, 401);
   }
 
-  // set jwt into cookies
-  await setCookieHandler(c, result);
+  // generate jwt (access and refresh) tokens
+  // refresh set into cookies
+  // return access token
+  const accessToken = await setCookieHandler(c, result);
 
-  return c.json(result, 200);
+  return c.json({ user: result, accessToken }, 200);
 };
 
 export default loginController;
