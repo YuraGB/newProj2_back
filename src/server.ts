@@ -2,7 +2,6 @@ import { serve } from "bun";
 import app from "./app";
 import "@/lib/polifil";
 
-// Функція запуску сервера
 const startServer = () => {
   console.log("🚀 Server starting...");
 
@@ -21,15 +20,13 @@ const startServer = () => {
     console.log("Server started on port 3000");
   } catch (err) {
     console.error("❌ Server crashed:", err);
-    process.exit(1); // Завершити процес, щоб його перезапустив менеджер
+    process.exit(1);
   }
 };
 
-// 🔄 **Автоматичний перезапуск при завершенні процесу**
 process.on("exit", (code) => {
   console.log(`🔄 Restarting server... (exit code: ${code})`);
-  setTimeout(() => Bun.spawn(["bun", "run", "dev"]), 2000); // Перезапуск через 3 секунди
+  setTimeout(() => Bun.spawn(["bun", "run", "dev"]), 3000);
 });
 
-// 🚀 **Запуск сервера**
 startServer();
