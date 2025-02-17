@@ -8,11 +8,9 @@ import {
 import { zValidator } from "@hono/zod-validator";
 import { setCookie } from "hono/cookie";
 import { editProfileController } from "@/controllers/authControllers/editProfileController";
-import { refreshTokenController } from "@/controllers/authControllers/refreshTokenController";
 
 const authRout = new Hono()
   .post("/login", zValidator("json", loginValidationSchema), loginController)
-  .post("/refresh", refreshTokenController)
   .post(
     "/register",
     zValidator("json", registerValidationSchema),
@@ -20,7 +18,7 @@ const authRout = new Hono()
   )
   .post("/edit_user", editProfileController)
   .post("/logout", (c) => {
-    setCookie(c, "token", "", {
+    setCookie(c, "refreshToken", "", {
       httpOnly: true,
       secure: true,
       sameSite: "strict",
