@@ -1,7 +1,7 @@
 import { db } from "@/db/drizzle";
 import { TUser, users } from "@/db/schemas/userTable";
 import { eq } from "drizzle-orm/sql/expressions/conditions";
-import { TUserWithoutPassword } from "@/types";
+import { TUserWithoutPassword } from "@/types/auth";
 
 export const profileService = async (
   id: TUser["id"],

@@ -1,4 +1,4 @@
-import { TUserWithoutPassword } from "@/types";
+import { TUserWithoutPassword } from "@/types/auth";
 import { db } from "@/db/drizzle";
 import { users } from "@/db/schemas";
 import { eq } from "drizzle-orm/sql/expressions/conditions";

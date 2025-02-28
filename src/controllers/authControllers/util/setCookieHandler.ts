@@ -1,7 +1,7 @@
 import { sign } from "hono/jwt";
 import { setCookie } from "hono/cookie";
 import { Context } from "hono";
-import { TUserWithoutPassword } from "@/types";
+import { TUserWithoutPassword } from "@/types/auth";
 
 const setCookieHandler = async (
   c: Context,
