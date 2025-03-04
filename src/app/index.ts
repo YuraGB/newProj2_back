@@ -6,6 +6,9 @@ import corsMiddleware from "@/middlewares/corsMiddleware";
 import { compress } from "hono/compress";
 import { cacheMiddleware } from "@/middlewares/cacheMiddleware";
 import securityMiddleware from "@/middlewares/securityMiddleware";
+import * as fs from "node:fs";
+import * as path from "node:path";
+import videoRoute from "@/routes/video";
 
 const app = new Hono();
 
@@ -18,7 +21,7 @@ app
   .use("/api/v1/profile", jwtMiddleware)
   // routes for api
   .route("/api/v1", routes)
-  //static routes
+  // static routes
   .use("/assets/*", serveStatic({ root: "../static" }))
   .use("/vite.svg", serveStatic({ root: "../static" }))
   .use("*", async (c, next) => {

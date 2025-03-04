@@ -29,6 +29,6 @@ if (!existsSync(journalPath)) {
   console.log("_journal.json created!");
 }
 
-await migrate(db as unknown as BunSQLDatabase<Record<string, unknown>>, {
-  migrationsFolder,
-});
+// await migrate(db as unknown as BunSQLDatabase<Record<string, unknown>>, {
+//   migrationsFolder,
+// });
