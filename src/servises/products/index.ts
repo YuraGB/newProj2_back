@@ -9,7 +9,7 @@ export const productsService = async (
   switch (identification) {
     case "home":
       productsData = await fetch(
-        "https://dummyjson.com/products?limit=10&skip=10&select=title,price,thumbnail",
+        "https://dummyjson.com/products?limit=10&skip=10&select=id,title,price,thumbnail",
       );
       break;
     case "search":
