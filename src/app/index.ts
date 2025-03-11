@@ -6,9 +6,7 @@ import corsMiddleware from "@/middlewares/corsMiddleware";
 import { compress } from "hono/compress";
 import { cacheMiddleware } from "@/middlewares/cacheMiddleware";
 import securityMiddleware from "@/middlewares/securityMiddleware";
-import * as fs from "node:fs";
-import * as path from "node:path";
-import videoRoute from "@/routes/video";
+import authMiddleware from "@/middlewares/authMiddleware";
 
 const app = new Hono();
 
@@ -18,6 +16,7 @@ app
   .use("*", cacheMiddleware)
   .use("*", corsMiddleware)
   .use("*", securityMiddleware)
+  .use("*", authMiddleware)
   .use("/api/v1/profile", jwtMiddleware)
   // routes for api
   .route("/api/v1", routes)

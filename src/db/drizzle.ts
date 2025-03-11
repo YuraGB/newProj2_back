@@ -1,11 +1,11 @@
 import { BunSQLiteDatabase, drizzle } from "drizzle-orm/bun-sqlite";
 import { Database } from "bun:sqlite";
 import { mkdirSync, existsSync } from "fs";
-import { migrate } from "drizzle-orm/bun-sql/migrator";
+// import { migrate } from "drizzle-orm/bun-sql/migrator";
 import * as schema from "./schemas";
 import * as path from "node:path";
 import * as fs from "node:fs";
-import { BunSQLDatabase } from "drizzle-orm/bun-sql/driver";
+// import { BunSQLDatabase } from "drizzle-orm/bun-sql/driver";
 
 const sqlite = new Database("sqlite.db");
 

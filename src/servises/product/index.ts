@@ -1,12 +1,13 @@
 import { TProduct } from "@/db/schemas/productTable";
 
-export const productPageService = async (
-  id: string,
+export const singleProductService = async (
+  id: TProduct["id"],
 ): Promise<TProduct | null> => {
   try {
     const product = await fetch(`https://dummyjson.com/products/${id}`);
     return await product.json();
-  } catch (e) {
+  } catch (error) {
+    console.log("Error in singleProductService: ", error);
     return null;
   }
 };

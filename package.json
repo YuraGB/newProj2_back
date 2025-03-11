@@ -5,7 +5,17 @@
     "dev": "bun  --watch ./src/server.ts",
     "dev:cluster": "bun ./src/cluster.ts",
     "dev:start": "bun --watch run dev",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "eslint --fix"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.{json,md,css,scss,html}": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
@@ -37,8 +47,8 @@
     "bun-plugin-tailwind": "^0.0.14",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
-    "drizzle-kit": "^0.30.5",
-    "drizzle-orm": "^0.40.0",
+    "drizzle-kit": "^0.30.4",
+    "drizzle-orm": "^0.39.1",
     "eslint": "^9.20.1",
     "hono": "^4.6.20",
     "jwt": "^0.2.0",
