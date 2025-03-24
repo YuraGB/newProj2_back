@@ -12,14 +12,17 @@ const app = new Hono();
 
 app
   .use(compress({ encoding: "gzip" }))
+
   // middlewares
   .use("*", cacheMiddleware)
   .use("*", corsMiddleware)
   .use("*", securityMiddleware)
   .use("*", authMiddleware)
   .use("/api/v1/profile", jwtMiddleware)
+
   // routes for api
   .route("/api/v1", routes)
+
   // static routes
   .use("/assets/*", serveStatic({ root: "../static" }))
   .use("/vite.svg", serveStatic({ root: "../static" }))

@@ -80,8 +80,7 @@ class BasketService {
       if (!existingBasket) {
         return [];
       }
-      console.dir("existingBasket", existingBasket);
-      console.dir("mergbasket", basket);
+
       // merge
       for (const product of basket) {
         const existingProduct = existingBasket.find(
