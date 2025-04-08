@@ -5,7 +5,6 @@ import { getCookie } from "hono/cookie";
 const jwtMiddleware = async (c: Context, next: () => Promise<void>) => {
   const authHeader = c.req.header("Authorization");
   const refreshToken = getCookie(c, "refreshToken");
-
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return c.json({ message: "Unauthorized", canRefresh: !!refreshToken }, 401);
   }

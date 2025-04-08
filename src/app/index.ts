@@ -5,25 +5,36 @@ import routes, { RouteType } from "@/routes";
 import corsMiddleware from "@/middlewares/corsMiddleware";
 import { compress } from "hono/compress";
 import { cacheMiddleware } from "@/middlewares/cacheMiddleware";
+import securityMiddleware from "@/middlewares/securityMiddleware";
+import authMiddleware from "@/middlewares/authMiddleware";
 
 const app = new Hono();
 
 app
   .use(compress({ encoding: "gzip" }))
+
+  // middlewares
   .use("*", cacheMiddleware)
   .use("*", corsMiddleware)
+  .use("*", securityMiddleware)
+  .use("*", authMiddleware)
   .use("/api/v1/profile", jwtMiddleware)
-  .route("/api/v1", routes);
+  .use("/api/v1/success/:id", jwtMiddleware)
 
-app.use("/assets/*", serveStatic({ root: "../static" }));
-app.use("/vite.svg", serveStatic({ root: "../static" }));
-app.use("*", async (c, next) => {
-  if (c.req.path.includes(".")) {
-    return next();
-  }
+  // routes for api
+  .route("/api/v1", routes)
 
-  return serveStatic({ root: "../static", path: "index.html" })(c, next);
-});
+  // static routes
+  // The static files should be generated and placed in the ./static folder in the root directory
+  .use("/assets/*", serveStatic({ root: "./static" }))
+  .use("/vite.svg", serveStatic({ root: "./static" }))
+  .use("*", async (c, next) => {
+    if (c.req.path.includes(".")) {
+      return next();
+    }
+
+    return serveStatic({ root: "./static", path: "index.html" })(c, next);
+  });
 
 type AppType = RouteType;
 

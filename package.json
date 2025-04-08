@@ -5,7 +5,10 @@
     "dev": "bun  --watch ./src/server.ts",
     "dev:cluster": "bun ./src/cluster.ts",
     "dev:start": "bun --watch run dev",
-    "prepare": "husky"
+    "build": "bun build src/server.ts --compile --outfile server --minify",
+    "prepare": "husky",
+    "lint": "eslint --fix",
+    "start": "server.exe"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [

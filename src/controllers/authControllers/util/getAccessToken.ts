@@ -1,4 +1,4 @@
-import { TUserWithoutPassword } from "@/types";
+import { TUserWithoutPassword } from "@/types/auth";
 import { sign } from "hono/jwt";
 
 export const getAccessToken = async (user: TUserWithoutPassword) => {

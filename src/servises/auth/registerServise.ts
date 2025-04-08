@@ -1,7 +1,7 @@
 import { db } from "@/db/drizzle";
 import { users } from "@/db/schemas/userTable";
 import bcrypt from "bcryptjs";
-import { TNewUser, TUserWithoutPassword } from "@/types";
+import { TNewUser, TUserWithoutPassword } from "@/types/auth";
 import dotenv from "dotenv";
 dotenv.config({
   path: ".env",
