@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "60cdb1b7-5509-4751-9ada-eedd1aea99f0",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "e5b88e18-f417-49c2-9028-5fe49403e1dd",
+  "prevId": "05653550-c031-4e78-9daf-ec990c5c59a4",
   "tables": {
     "basket": {
       "name": "basket",
@@ -587,7 +587,7 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": "'2025-04-08T13:29:51.598Z'"
+          "default": "'2025-04-08T13:34:30.301Z'"
         }
       },
       "indexes": {},

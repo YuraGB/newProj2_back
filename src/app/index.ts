@@ -19,19 +19,21 @@ app
   .use("*", securityMiddleware)
   .use("*", authMiddleware)
   .use("/api/v1/profile", jwtMiddleware)
+  .use("/api/v1/success/:id", jwtMiddleware)
 
   // routes for api
   .route("/api/v1", routes)
 
   // static routes
-  .use("/assets/*", serveStatic({ root: "../static" }))
-  .use("/vite.svg", serveStatic({ root: "../static" }))
+  // The static files should be generated and placed in the ./static folder in the root directory
+  .use("/assets/*", serveStatic({ root: "./static" }))
+  .use("/vite.svg", serveStatic({ root: "./static" }))
   .use("*", async (c, next) => {
     if (c.req.path.includes(".")) {
       return next();
     }
 
-    return serveStatic({ root: "../static", path: "index.html" })(c, next);
+    return serveStatic({ root: "./static", path: "index.html" })(c, next);
   });
 
 type AppType = RouteType;

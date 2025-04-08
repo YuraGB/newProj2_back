@@ -17,7 +17,7 @@ export const basketTable = sqliteTable(
   },
   (table) => [
     index("user_idx").on(table.userId),
-    uniqueIndex("product_idx").on(table.productId),
+    uniqueIndex("user_product_idx").on(table.userId, table.productId),
   ],
 );
 

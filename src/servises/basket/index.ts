@@ -74,6 +74,7 @@ class BasketService {
     basket: TGetBasketProduct[],
   ): Promise<TGetBasketProduct[] | []> {
     try {
+      console.log("here", userId);
       // Get existing users basket
       const existingBasket = await this.getUserBasketProducts(userId);
 

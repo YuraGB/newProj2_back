@@ -3,9 +3,9 @@ import { basketService } from "@/servises/basket";
 
 export const addToBasketController = async (c: Context) => {
   const user = c.get("user") as { id: string };
-
+  console.log("user", user);
   if (!user) {
-    return c.json({ basket: [] });
+    return c.json({ basket: [] }, 401);
   }
 
   const { productId, quantity } = await c.req.json();

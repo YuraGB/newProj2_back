@@ -3,6 +3,8 @@ import { verify } from "hono/jwt";
 
 const authMiddleware = async (c: Context, next: () => Promise<void>) => {
   const authHeader = c.req.header("Authorization");
+  console.log("authHeader", authHeader);
+  console.log(c.req.path);
 
   if (!authHeader) {
     return await next();
@@ -14,8 +16,8 @@ const authMiddleware = async (c: Context, next: () => Promise<void>) => {
 
     c.set("user", payload);
     return await next();
-  } catch {
-    console.log("Error verifying token: ", token);
+  } catch (e) {
+    console.log("error", e);
     return await next();
   }
 };
