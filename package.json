@@ -8,7 +8,8 @@
     "build": "bun build src/server.ts --compile --outfile server --minify",
     "prepare": "husky",
     "lint": "eslint --fix",
-    "start": "server.exe"
+    "start": "server.exe",
+    "studio": "bun drizzle-kit studio"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [

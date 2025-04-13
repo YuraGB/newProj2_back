@@ -3,8 +3,6 @@ import { verify } from "hono/jwt";
 
 const authMiddleware = async (c: Context, next: () => Promise<void>) => {
   const authHeader = c.req.header("Authorization");
-  console.log("authHeader", authHeader);
-  console.log(c.req.path);
 
   if (!authHeader) {
     return await next();

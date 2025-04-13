@@ -3,6 +3,10 @@ import { and, eq } from "drizzle-orm/sql/expressions/conditions";
 import { db } from "@/db/drizzle";
 import { TGetBasketProduct } from "@/types/basket";
 
+/**
+ * Basket service
+ * @class BasketService
+ */
 class BasketService {
   async getUserBasketProducts(
     userId: TUser["id"],
@@ -21,6 +25,13 @@ class BasketService {
     }
   }
 
+  /**
+   * Add product to basket
+   * @param {number} userId
+   * @param {number} productId
+   * @param {number} quantity
+   * @returns {Promise<TBasket | []>}
+   */
   async addProductToBasket(
     userId: TUser["id"],
     productId: TBasket["productId"],
@@ -45,6 +56,13 @@ class BasketService {
     }
   }
 
+  /**
+   * Update product in basket
+   * @param {number} userId
+   * @param {number} productId
+   * @param {number} quantity
+   * @returns {Promise<TBasket | null>}
+   */
   async updateProductInBasket(
     userId: TUser["id"],
     productId: TBasket["productId"],
@@ -69,6 +87,12 @@ class BasketService {
     }
   }
 
+  /**
+   * Merge basket with existing products
+   * @param {number} userId
+   * @param {Array<TGetBasketProduct>} basket
+   * @returns {Promise<Array<TGetBasketProduct> | []>}
+   */
   async mergeBasket(
     userId: TUser["id"],
     basket: TGetBasketProduct[],
@@ -110,6 +134,25 @@ class BasketService {
     } catch (e) {
       console.log("Error in mergeBasket: ", e);
       return [];
+    }
+  }
+
+  /**
+   * Remove basket for user
+   * @param {number}userId
+   * @returns {Promise<{id: number} | null>}
+   */
+  async removeBasket(userId: TUser["id"]): Promise<{ id: number } | null> {
+    try {
+      const [removedBasket] = await db
+        .delete(basketTable)
+        .where(eq(basketTable.userId, userId))
+        .returning({ id: basketTable.id });
+      console.log("removedBasket", removedBasket);
+      return removedBasket;
+    } catch (e) {
+      console.log("Error in removeBasket: ", e);
+      return null;
     }
   }
 }
